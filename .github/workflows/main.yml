@@ -1,0 +1,31 @@
+on: 
+  workflow_dispatch:
+  
+jobs:
+  build:
+    name: Build go app
+    runs-on: ubuntu-latest
+    steps:
+      - name: to checkout
+        uses: actions/checkout@v2
+        
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.15   
+      
+      - name: to build 
+        uses: virtuecloud/Composite-actions/Build_Actions/Go_build@test
+        with:
+          DEPENDENCY_REQUIRED: false
+          BUILD_PATH: .
+
+  deploy:
+    name: Deploy to ec2
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: AWS SSM Send-Command
+      - run: aws ssm send-command --document-name "AWS-RunRemoteScript" --instance-ids "i-0161cb4d1ea84157e" --parameters '{"sourceType":["GitHub"],"sourceInfo":["{\"owner\":\"Jainsi1\", \"repository\":\"G0-App-ec2-Deployment  \", \"path\": \"news-demo-starter-files"}"],"commandLine":["./news-demo-starter-files"]}' 
