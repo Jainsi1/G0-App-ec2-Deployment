@@ -1,7 +1,8 @@
 #!/bin/sh     
 
 
-sudo apt install golang-go
+sudo apt install golang-go -y
+sudo apt update -y
 
 echo go version
 
