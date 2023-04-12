@@ -42,7 +42,7 @@ jobs:
           aws-region: us-east-1
 
       - name: upload to s3
-        run: aws s3 sync ./ s3://flask-buckett --delete 
+        run: aws s3 sync ./ s3://rennn --delete 
         
         
       - name: AWS SSM Send-Command
