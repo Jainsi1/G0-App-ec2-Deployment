@@ -1,3 +1,6 @@
+#!/bin/sh     
+
+
 sudo apt install golang-go
 
 echo go version
